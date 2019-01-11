@@ -1,5 +1,6 @@
 package com.hyanzz.fanout;
 
+import com.hyanzz.utils.MyDateUtils;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,7 +17,7 @@ public class FanoutSender {
      * Fanout 就是我们熟悉的广播模式或者订阅模式，给Fanout转发器发送消息，绑定了这个转发器的所有队列都收到这个消息。
      */
     public void send() {
-        String msgString="fanoutSender :hello i am hyanzz";
+        String msgString="fanoutSender :hello i am hyanzz"+ MyDateUtils.formatDate(MyDateUtils.getCurrentTime(),"yyyy-MM-dd HH:mm:ss");
         System.out.println(msgString);
         rabbitTemplate.convertAndSend("fanoutExchange","111.ee", msgString);
     }
